@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   resources :people do
+    resources :phones
+  end
+  resources :people do
+    resources :emails
+  end
+  resources :people do
     resources :addresses
   end
   devise_for :users

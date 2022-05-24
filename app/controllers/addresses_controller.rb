@@ -26,7 +26,7 @@ class AddressesController < ApplicationController
     @address = @person.addresses.build(address_params)
 
     if @address.save
-      redirect_to([@address.person, @address], notice: 'Address was successfully created.')
+      redirect_to(@address.person)
     else
       render action: 'new'
     end
@@ -35,7 +35,7 @@ class AddressesController < ApplicationController
   # PUT people/1/addresses/1
   def update
     if @address.update_attributes(address_params)
-      redirect_to([@address.person, @address], notice: 'Address was successfully updated.')
+      redirect_to(@address.person, notice: 'Address was successfully updated.')
     else
       render action: 'edit'
     end
@@ -45,7 +45,7 @@ class AddressesController < ApplicationController
   def destroy
     @address.destroy
 
-    redirect_to person_addresses_url(@person)
+    redirect_to(@person)
   end
 
   private

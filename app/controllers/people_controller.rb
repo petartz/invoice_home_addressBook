@@ -9,6 +9,9 @@ class PeopleController < ApplicationController
 
   # GET /people/1 or /people/1.json
   def show
+    @address = @person.addresses.build
+    @email = @person.emails.build
+    @phone = @person.phones.build
   end
 
   # GET /people/new

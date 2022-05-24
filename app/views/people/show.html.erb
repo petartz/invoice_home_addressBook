@@ -40,6 +40,10 @@
 <%= link_to 'Back', people_path %>
 
 <hr>
+<h1>New address</h1>
+<%= render 'addresses/form' %>
+
+<hr>
 <h1>Listing addresses</h1>
 
 <table>
@@ -55,19 +59,86 @@
   </tr>
 
 <% @person.addresses.each do |address| %>
+  <% if address.persisted? %>
+    <tr>
+      <td><%= address.street %></td>
+      <td><%= address.town %></td>
+      <td><%= address.zip_code %></td>
+      <td><%= address.state %></td>
+      <td><%= address.country %></td>
+      <td><%= link_to 'Show', [address.person, address] %></td>
+      <td><%= link_to 'Edit', edit_person_address_path(address.person, address) %></td>
+      <td><%= link_to 'Destroy', [address.person, address], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+<br />
+<%= link_to 'New Address', new_person_address_path(@person.id) %>
+
+<hr>
+<h1>New phone</h1>
+<%= render 'phones/form' %>
+
+<hr>
+<h1>Listing phones</h1>
+
+<table>
   <tr>
-    <td><%= address.street %></td>
-    <td><%= address.town %></td>
-    <td><%= address.zip_code %></td>
-    <td><%= address.state %></td>
-    <td><%= address.country %></td>
-    <td><%= link_to 'Show', [address.person, address] %></td>
-    <td><%= link_to 'Edit', edit_person_address_path(address.person, address) %></td>
-    <td><%= link_to 'Destroy', [address.person, address], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <th>Phone number</th>
+    <th>Comment</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
+
+<% @person.phones.each do |phone| %>
+  <% if phone.persisted? %>
+    <tr>
+      <td><%= phone.phone_number %></td>
+      <td><%= phone.comment %></td>
+      <td><%= link_to 'Show', [phone.person, phone] %></td>
+      <td><%= link_to 'Edit', edit_person_phone_path(phone.person, phone) %></td>
+      <td><%= link_to 'Destroy', [phone.person, phone], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Address', new_person_address_path(@person.id) %>
+<%= link_to 'New Phone', new_person_phone_path(@person.id) %>
+
+
+<hr>
+<h1>New email</h1>
+<%= render 'emails/form' %>
+
+<hr>
+<h1>Listing emails</h1>
+
+<table>
+  <tr>
+    <th>Email address</th>
+    <th>Comment</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @person.emails.each do |email| %>
+  <% if email.persisted? %>
+    <tr>
+      <td><%= email.email_address %></td>
+      <td><%= email.comment %></td>
+      <td><%= link_to 'Show', [email.person, email] %></td>
+      <td><%= link_to 'Edit', edit_person_email_path(email.person, email) %></td>
+      <td><%= link_to 'Destroy', [email.person, email], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Email', new_person_email_path(@person.id) %>
